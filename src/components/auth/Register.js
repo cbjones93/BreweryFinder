@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom"
 import { authApi, userStorageKey } from "./authSettings"
 import "./Login.css"
 
-export const Register = () => {
+export const Register = ({setAuthUser}) => {
 
     const [registerUser, setRegisterUser] = useState({ firstName: "", lastName: "", email: "" })
     const [conflictDialog, setConflictDialog] = useState(false)
@@ -43,6 +43,7 @@ export const Register = () => {
                         .then(createdUser => {
                             if (createdUser.hasOwnProperty("id")) {
                                 sessionStorage.setItem(userStorageKey, createdUser.id)
+                                setAuthUser(createdUser)
                                 history.push("/")
                             }
                         })

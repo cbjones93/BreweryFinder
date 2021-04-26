@@ -10,6 +10,7 @@ export const NavBar = ({ clearUser, isAuthenticated }) => {
         clearUser();
         history.push('/');
     }
+    
 //  const currentUser = parseInt(sessionStorage.getItem("app_user_id"))
     return (
        
