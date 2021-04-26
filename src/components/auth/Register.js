@@ -29,7 +29,7 @@ export const Register = () => {
         existingUserCheck()
             .then((userExists) => {
                 if (!userExists) {
-                    fetch(`${authApi.localApiBaseUrl}/${authApi.endpoint}`, {
+                    fetch(`http://localhost:8088/users`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
