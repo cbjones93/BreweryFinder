@@ -16,6 +16,7 @@ getBreweriesByState(event.target.value)
     //         setCities(citiesFromAPI)
     //     })
     // }, []);
+    
     return (
         <>
             <h3>Select a state</h3>
