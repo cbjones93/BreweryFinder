@@ -128460,5 +128460,17 @@
       "name": "Chuck Norris",
       "id": 2
     }
+  ],
+  "follow": [
+    {
+      "id":1,
+      "currentUserId":1,
+      "userId":2
+    },
+    {
+      "id":2,
+      "currentUserId":2,
+      "userId":1
+    }
   ]
 }
