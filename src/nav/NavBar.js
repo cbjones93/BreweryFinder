@@ -10,6 +10,7 @@ export const NavBar = ({ clearUser, isAuthenticated }) => {
         clearUser();
         history.push('/');
     }
+    
 //  const currentUser = parseInt(sessionStorage.getItem("app_user_id"))
     return (
        
@@ -17,6 +18,9 @@ export const NavBar = ({ clearUser, isAuthenticated }) => {
             <img className="logo" src={BreweryLogo} alt="logo" />
             <li className="navbar__item active">
                 <Link className="navbar__link" to="/">Home</Link>
+            </li>
+            <li className="navbar_search">
+                <Link className="navbar__link" to="/brewerysearch">BreweryFinder</Link>
             </li>
 
             {isAuthenticated
