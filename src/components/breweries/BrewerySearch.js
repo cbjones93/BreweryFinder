@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from 'react'
-import { getAllCities } from '../modules/BreweryManager'
+import {getBreweriesByState } from '../modules/BreweryManager'
+import {BreweryCard} from './BreweryCard'
+import './BrewerySearch.css'
+import {Link} from 'react-router-dom'
 
 export const BrewerySearch = () => {
-    const [cities, setCities] = useState([])
-
-    useEffect(() => {
-        getAllCities().then(citiesFromAPI => {
-            setCities(citiesFromAPI)
-        })
-    }, []);
+    // const [cities, setCities] = useState([])
+    const [breweries,setBreweries]=useState([])
+const handleSelectState = (event) =>{
+getBreweriesByState(event.target.value)
+.then(breweriesFromAPI=>setBreweries(breweriesFromAPI))
+}
+    // useEffect(() => {
+    //     getAllCities().then(citiesFromAPI => {
+    //         setCities(citiesFromAPI)
+    //     })
+    // }, []);
     return (
         <>
             <h3>Select a state</h3>
-            <select id="states" name="ST">
-                <option value="&lt;?php echo $_POST['ST']; ?&gt;"></option>
+            <select id="states" name="ST" onChange={handleSelectState}>
+                <option value= "0">Select a State</option>
                 <option value="Alabama">Alabama</option>
                 <option value="Alaska">Alaska</option>
                 <option value="Arizona">Arizona</option>
@@ -68,14 +75,17 @@ export const BrewerySearch = () => {
                 <option value="Other">Other</option>
             </select>
             <h3>Select a city</h3>
-            <select id="cities">
-                <option value="0">Select a city</option>
-                {cities.map(city => (
-                    <option key={city.id} value={city.id}>
-                        {city.name}
-                    </option>
-                ))}
-            </select>
+            {breweries.map(eachBrewery =>{
+                return (
+                    
+                    <div className="searchResults">
+                        
+                <p>{eachBrewery.name} <Link to={`/brewery/${eachBrewery.id}`}><button className="details">Details</button></Link></p>
+                <p>Address: {eachBrewery.street}, {eachBrewery.city}, {eachBrewery.state}</p>
+               
+                </div>
+                )
+            })}
         </>
     )
 }

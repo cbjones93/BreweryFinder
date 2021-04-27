@@ -18,7 +18,7 @@ export const BreweryFinder = () => {
             <>
                 <NavBar clearUser={clearUser} isAuthenticated={isAuthenticated}/>
                 <ApplicationViews setAuthUser={setAuthUser} isAuthenticated={isAuthenticated} />
-                <Footer />
+                {/* <Footer /> */}
             </>
         )
 

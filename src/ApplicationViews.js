@@ -4,6 +4,8 @@ import { Home } from "./Home"
 import { Login } from "./components/auth/Login"
 import { Register } from './components/auth/Register'
 import {BrewerySearch} from './components/breweries/BrewerySearch'
+import { BreweryCard } from "./components/breweries/BreweryCard"
+import { BreweryDetail } from "./components/breweries/BreweryCardDetail"
 
 export const ApplicationViews = ({ isAuthenticated, setAuthUser }) => {
     return (
@@ -23,6 +25,13 @@ export const ApplicationViews = ({ isAuthenticated, setAuthUser }) => {
         <Route path ="/brewerySearch">
             <BrewerySearch />
         </Route>
+        <Route path ="/breweryCard">
+            <BreweryCard />
+        </Route>
+        <Route exact path="/brewery/:breweryId(\d+)">
+                <BreweryDetail />
+            </Route>
+
         </>
     )
 }

@@ -11,7 +11,12 @@ export const getAllCities = (city) =>{
     .then(response=>response.json())
 }
 
-export const getAllStates=(state)=>{
-    return fetch (`${remoteURL}/breweries/state=${state}}`)
+export const getBreweriesByState=(state)=>{
+    return fetch (`${remoteURL}/breweries/?state=${state}`)
+    .then(response=>response.json())
+}
+
+export const getBreweryById=(id)=>{
+    return fetch (`${remoteURL}/breweries/${id}`)
     .then(response=>response.json())
 }
