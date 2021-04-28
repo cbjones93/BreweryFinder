@@ -20,3 +20,4 @@ export const getBreweryById=(id)=>{
     return fetch (`${remoteURL}/breweries/${id}`)
     .then(response=>response.json())
 }
+
