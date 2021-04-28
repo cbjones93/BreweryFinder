@@ -11,7 +11,7 @@ export const NavBar = ({ clearUser, isAuthenticated }) => {
         history.push('/');
     }
     
-//  const currentUser = parseInt(sessionStorage.getItem("app_user_id"))
+const currentUser = (sessionStorage.getItem("app_user_name"))
     return (
        
         <ul className="navbar">
@@ -26,8 +26,9 @@ export const NavBar = ({ clearUser, isAuthenticated }) => {
             {isAuthenticated
            
            ? 
-           
+          
             <div className="authenticatedNav">
+                <p>Hello, {currentUser.replace(/['"]+/g, '')}!</p>
                 <div className="logout"><li className="navbar__item">
                     <span className="navbar__link" onClick={handleLogout}> Logout </span>
                 </li> </div>

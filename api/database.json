@@ -128459,18 +128459,68 @@
       "email": "chuck@home.com",
       "name": "Chuck Norris",
       "id": 2
+    },
+    {
+      "email": "harry@home.com",
+      "name": "Daniel Radcliffe",
+      "id": 3
+    },
+    {
+      "email": "awkwardgirl@home.com",
+      "name": "Emma Stone",
+      "id": 4
+    },
+    {
+      "email": "isengard@home.com",
+      "name": "Christopher Lee",
+      "id": 5
     }
   ],
   "follow": [
     {
-      "id":1,
-      "currentUserId":1,
-      "userId":2
+      "userId": 1,
+      "currentUserId": 5,
+      "id": 3
     },
     {
-      "id":2,
-      "currentUserId":2,
-      "userId":1
+      "userId": 2,
+      "currentUserId": 5,
+      "id": 4
+    },
+    {
+      "userId": 3,
+      "currentUserId": 5,
+      "id": 5
+    },
+    {
+      "userId": 3,
+      "currentUserId": 2,
+      "id": 6
+    },
+    {
+      "userId": 1,
+      "currentUserId": 2,
+      "id": 7
+    },
+    {
+      "userId": 3,
+      "currentUserId": 1,
+      "id": 8
+    },
+    {
+      "userId": 1,
+      "currentUserId": 3,
+      "id": 9
+    },
+    {
+      "userId": 2,
+      "currentUserId": 1,
+      "id": 10
+    },
+    {
+      "userId": 5,
+      "currentUserId": 1,
+      "id": 11
     }
   ]
 }
