@@ -128512,5 +128512,21 @@
       "currentUserId": 1,
       "id": 12
     }
+  ],
+  "userBreweries": [
+    {
+      "id": 1,
+      "userId": 1,
+      "breweryId": "6553",
+      "beenToBrewery": true,
+      "review": "We love Mayday! Whether it's a date night, a family gathering, or dinner out with friends, Mayday is always the perfect destination. They always have a beer that everyone loves and sodas for the kids. The owner is awesome, as well as a great staff. They have different food trucks depending on the night, but there is always something to eat for everyone."
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "breweryId": "666",
+      "beenToBrewery": true,
+      "review": "Awful place."
+    }
   ]
 }
