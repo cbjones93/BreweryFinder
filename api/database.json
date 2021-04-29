@@ -128527,6 +128527,18 @@
       "breweryId": "666",
       "beenToBrewery": true,
       "review": "Awful place."
+    },
+    {
+      "userId": 2,
+      "breweryId": "6553",
+      "beenToBrewery": true,
+      "id": 3
+    },
+    {
+      "userId": 2,
+      "breweryId": "6553",
+      "beenToBrewery": true,
+      "id": 4
     }
   ]
 }
