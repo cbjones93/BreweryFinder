@@ -1,45 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import {getBreweryById, getAllBreweries} from '../modules/BreweryManager'
-import { useParams, useHistory } from "react-router-dom" 
-import {BreweryReviewCard, breweryReviewCard} from './BreweryReviewCard'
-import { getAllUserBreweries } from '../modules/UserBreweryManager';
-import {getUsers} from '../modules/UserManager'
+import {getBreweryById} from '../modules/BreweryManager'
+import { useParams} from "react-router-dom" 
+import {BreweryReviewCard} from './BreweryReviewCard'
+import {getUserBreweriesByBreweryId } from '../modules/UserBreweryManager';
+
 export const BreweryDetail = () =>{
     const [brewery, setBrewery] = useState({})
-    const [breweries, setBreweries] = useState([])
-    const [users, setUsers] = useState([])
+    const [usersFrombreweries, setUsersFromBreweries] = useState([])
     const [isLoading, setIsLoading]= useState(true);
-    const [breweryReviews, setBreweryReviews] = useState([])
     const {breweryId} = useParams();
-    const {breweryReviewId}= useParams();
-    const history = useHistory();
-    const getUserBrewieres = () =>{
-        return getAllUserBreweries().then(userBreweriesFromAPI =>{
-         setBreweryReviews(userBreweriesFromAPI)
-        })
-    }
-    const getUserById = () => {
-        return getUsers().then(usersFromAPI => {
-            setUsers(usersFromAPI)
-        })
-    }
     const getUsersFromUserBreweries = () => {
-        getAllUserBreweries()
+        getUserBreweriesByBreweryId(breweryId)
         .then(breweriesFromAPI => {
-            const breweryReviewsAsUsers = breweriesFromAPI.map(brewery => users.find(user => user.id===brewery.userId)
-            )
-            setBreweries(breweryReviewsAsUsers)
+            setUsersFromBreweries(breweriesFromAPI)
         })
     }
-    useEffect(() => {
-        getUserBrewieres();
-    }, []);
-    useEffect(() => {
-        getUserById()
-    }, [])
+  
     useEffect(()=>{
         getUsersFromUserBreweries()
-    },[users])
+    },[breweryId])
 
     const cleanPhone = (number => {
         const cleaned = ('' + number).replace(/\D/g, '')
@@ -52,10 +31,8 @@ export const BreweryDetail = () =>{
       })
     useEffect(()=>{
         console.log("useEffect", breweryId)
-        // debugger
         getBreweryById(breweryId)
         .then(b =>{
-            console.log(b)
             setBrewery({
                 id:b.id,
                 name:b.name,
@@ -78,12 +55,12 @@ export const BreweryDetail = () =>{
             <p>Website: <a href= {brewery.website_url}>{brewery.website_url}</a></p>
             <p>Phone: {cleanPhone(brewery.phone)}</p>
             <p>Rating:</p>
-            <p>Reviews:{breweryReviews.map(review =>{
-                if(review.breweryId===brewery.id)
+            <p>Reviews:{usersFrombreweries.map(user =>{
                 return (
                     <BreweryReviewCard 
-                    key={review.id}
-                    review= {review} />
+                    key={user.id}
+                    user= {user}
+                    name={user.name} />
                 )
             })}</p>
         </div>
