@@ -7,6 +7,7 @@ import { BrewerySearch } from './components/breweries/BrewerySearch'
 import { BreweryCard } from "./components/breweries/BreweryCard"
 import { BreweryDetail } from "./components/breweries/BreweryCardDetail"
 import {FollowingList} from './components/follow/FollowList'
+import {AddFollowList} from './components/follow/AddFollowList'
 
 export const ApplicationViews = ({ isAuthenticated, setAuthUser }) => {
     return (
@@ -34,6 +35,9 @@ export const ApplicationViews = ({ isAuthenticated, setAuthUser }) => {
             </Route>
             <Route exact path="/follow">
                 <FollowingList />
+            </Route>
+            <Route path="/follow/add">
+                <AddFollowList />
             </Route>
         </>
     )
