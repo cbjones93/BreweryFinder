@@ -1,7 +1,7 @@
 import React from "react"
 import {Link, useHistory} from 'react-router-dom';
 
-export const BreweryReviewCard = ({review}) =>{
+export const BreweryReviewCard = ({review,}) =>{
     const history =useHistory();
     return (
         <div className="breweryReviewCard">
