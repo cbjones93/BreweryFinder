@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import {getBreweryById} from '../modules/BreweryManager'
+import {getBreweryById, getAllBreweries} from '../modules/BreweryManager'
 import { useParams, useHistory } from "react-router-dom" 
 import {BreweryReviewCard, breweryReviewCard} from './BreweryReviewCard'
 import { getAllUserBreweries } from '../modules/UserBreweryManager';
 import {getUsers} from '../modules/UserManager'
 export const BreweryDetail = () =>{
     const [brewery, setBrewery] = useState({})
+    const [breweries, setBreweries] = useState([])
     const [users, setUsers] = useState([])
     const [isLoading, setIsLoading]= useState(true);
     const [breweryReviews, setBreweryReviews] = useState([])
@@ -22,12 +23,23 @@ export const BreweryDetail = () =>{
             setUsers(usersFromAPI)
         })
     }
+    const getUsersFromUserBreweries = () => {
+        getAllUserBreweries()
+        .then(breweriesFromAPI => {
+            const breweryReviewsAsUsers = breweriesFromAPI.map(brewery => users.find(user => user.id===brewery.UserId)
+            )
+            setBreweries(breweryReviewsAsUsers)
+        })
+    }
     useEffect(() => {
         getUserBrewieres();
     }, []);
     useEffect(() => {
         getUserById()
     }, [])
+    useEffect(()=>{
+        getUsersFromUserBreweries()
+    },[])
 
     const cleanPhone = (number => {
         const cleaned = ('' + number).replace(/\D/g, '')
