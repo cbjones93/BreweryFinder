@@ -10,7 +10,7 @@ export const FollowingList = () => {
     const history = useHistory();
     const handleDeleteFollowing = id => {
         deleteFollowing(id)
-            .then(() => getAllFollowing().then(setFollowing)).then(()=>history.push("/follow"));
+            .then(() => getAllFollowing().then(setFollowing)).then(window.location.reload ());
     };
     const handleAddFollow=id =>{
         const newUserObject = {
