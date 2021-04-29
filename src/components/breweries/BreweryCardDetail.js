@@ -26,7 +26,7 @@ export const BreweryDetail = () =>{
     const getUsersFromUserBreweries = () => {
         getAllUserBreweries()
         .then(breweriesFromAPI => {
-            const breweryReviewsAsUsers = breweriesFromAPI.map(brewery => users.find(user => user.id===brewery.UserId)
+            const breweryReviewsAsUsers = breweriesFromAPI.map(brewery => users.find(user => user.id===brewery.userId)
             )
             setBreweries(breweryReviewsAsUsers)
         })
@@ -39,7 +39,7 @@ export const BreweryDetail = () =>{
     }, [])
     useEffect(()=>{
         getUsersFromUserBreweries()
-    },[])
+    },[users])
 
     const cleanPhone = (number => {
         const cleaned = ('' + number).replace(/\D/g, '')
