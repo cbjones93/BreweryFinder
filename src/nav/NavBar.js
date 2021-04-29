@@ -34,6 +34,8 @@ const currentUser = (sessionStorage.getItem("app_user_name"))
                 </li> </div>
                 <li className="navbar_search">
                 <Link className="navbar__link" to="/follow">Following List</Link>
+            </li>  <li className="navbar_search">
+                <Link className="navbar__link" to="/favorites">Favorites List</Link>
             </li>
                 </div>
                 
