@@ -26,7 +26,7 @@ export const deleteFollowing = (id) =>{
 }
 
 export const getAllFollowers = (id) =>{
-    return fetch (`${remoteURL}/follow/?currentUserId=${id}`)
+    return fetch (`${remoteURL}/follow/?userId=${id}`)
     .then(response => response.json())
 }
 

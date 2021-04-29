@@ -1,15 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { FollowCard } from './FollowCard'
 import { FollowerCard } from './FollowerCard'
-import { deleteFollowing, getAllFollowing, getAllFollowers, getUsers } from '../modules/FollowManager'
+import { deleteFollowing, getAllFollowing, getAllFollowers, getUsers,followUser } from '../modules/FollowManager'
 import { useHistory, Link } from 'react-router-dom'
 
 export const FollowingList = () => {
+    
+    const currentUser = parseInt(sessionStorage.getItem("app_user_id"));
     const history = useHistory();
     const handleDeleteFollowing = id => {
         deleteFollowing(id)
-            .then(() => getAllFollowing().then(setFollowing).then(window.location.reload()));
+            .then(() => getAllFollowing().then(setFollowing)).then(()=>history.push("/follow"));
     };
+    const handleAddFollow=id =>{
+        const newUserObject = {
+            "userId":id,
+            "currentUserId": currentUser
+        }
+        followUser(newUserObject)
+        .then(()=>getAllFollowing().then(setFollowers).then(window.location.reload()))
+    }
     const [following, setFollowing] = useState([]);
     const [followers, setFollowers] = useState([]);
     const [users, setUsers] = useState([]);
@@ -22,23 +32,31 @@ export const FollowingList = () => {
     };
     const getFollowers = () => {
         const currentUser = parseInt(sessionStorage.getItem("app_user_id"));
-        return getAllFollowers(currentUser).then(followersFromAPI => {
-            setFollowers(followersFromAPI)
+        getAllFollowers(currentUser)
+        .then(followersFromAPI => {
+            // eachFollower we need to get user object
+            const followersAsUsers = followersFromAPI.map(follower => users.find(user => user.id===follower.currentUserId)
+            )
+            setFollowers(followersAsUsers)
         })
     }
-    const getUserById = () => {
+    const getAllUsers = () => {
         return getUsers().then(usersFromAPI => {
             setUsers(usersFromAPI)
         })
     }
+    console.log(users)
     useEffect(() => {
         getFollowing();
     }, [])
     useEffect(() => {
+        if(users.length >0){
         getFollowers()
-    }, [])
+        }
+    }, [users])
+
     useEffect(() => {
-        getUserById()
+        getAllUsers()
     }, [])
 
     return (
@@ -57,12 +75,15 @@ export const FollowingList = () => {
             })}
             <h2 className="followers_list">People That Follow You</h2>
             {followers.map(follower => {
-                if (follower.currentUserId === users.id)
+                console.log(follower)
                     return (
                         <FollowerCard
                             key={follower.id}
-                            follower={follower} />)
-            })}
+                            follower={follower}
+                            handleAddFollow={handleAddFollow} />)
+            }
+            )
+            }
         </div>
 
 
