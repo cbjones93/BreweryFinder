@@ -5,10 +5,7 @@ export const getUserBreweriesByBreweryId = (breweryId) => {
     return fetch (`${remoteURL}/userBreweries?breweryId=${breweryId}&_expand=user`)
     .then(response => response.json())
 }
-export const getAllUserBreweries = () => {
-    return fetch (`${remoteURL}/userBreweries`)
-    .then(response => response.json())
-}
+
 export const AddNewUserBrewery = (newUserBrewery) =>{
     return fetch (`${remoteURL}/userBreweries`, {
         method: "POST",
@@ -25,17 +22,16 @@ export const DeleteUserBrewery = (id) =>{
     })
     .then(response => response.json())
 }
-export const AddNewUserBreweryReview = (newUserBreweryReview) =>{
-    return fetch (`${remoteURL}/userBreweries`, {
+export const updateUserBrewery = (newUserBreweryObj) =>{
+    return fetch (`${remoteURL}/userBreweries/${newUserBreweryObj.id}`, {
         method: "PUT",
         headers :{
             "Content-Type" : "application/json"
         },
-        body: JSON.stringify(newUserBreweryReview)
+        body: JSON.stringify(newUserBreweryObj)
     }).then(response => response.json())
 }
-
-export const getBrewerybyUserBreweryId = () =>{
-    return fetch (`${remoteURL}/userbreweries/?&_expand=brewery&_expand=user`)
+export const getAllUserBreweries = (userId) =>{
+    return fetch (`${remoteURL}/userbreweries/?userId=${userId}&_expand=brewery&_expand=user`)
     .then(response => response.json())
 }

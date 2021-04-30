@@ -3,7 +3,7 @@ import { getBreweryById } from '../modules/BreweryManager'
 import { useParams } from "react-router-dom"
 import { BreweryReviewCard } from './BreweryReviewCard'
 import { getUserBreweriesByBreweryId, AddNewUserBrewery } from '../modules/UserBreweryManager';
-import {ReviewForm} from '../favorites/BreweryReviewForm'
+import {ReviewForm} from '../mybreweries/BreweryReviewForm'
 
 export const BreweryDetail = () => {
     const [brewery, setBrewery] = useState({})

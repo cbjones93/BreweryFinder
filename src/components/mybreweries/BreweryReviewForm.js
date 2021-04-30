@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom'
 import {StarRating} from '../breweries/StarRating'
-import {AddNewUserBreweryReview} from '../modules/UserBreweryManager'
+import {updateUserBrewery} from '../modules/UserBreweryManager'
 
 export const ReviewForm = () =>{
     const [review, setReview] = useState([]);
@@ -16,7 +16,7 @@ export const ReviewForm = () =>{
     const createReview = event =>{
         event.preventDefault();
             setIsLoading(true);
-            AddNewUserBreweryReview(event)
+            updateUserBrewery(event)
             .then(()=>history.push("favorites"))
         }
     
@@ -25,8 +25,8 @@ export const ReviewForm = () =>{
         <form>
             <fieldset>
                 <div className="formgrid">
-                    <label htmlFor="rating">Rating
-                    <StarRating /></label>
+                    {/* <label htmlFor="rating">Rating
+                    <StarRating /></label> */}
                     <label htmlFor="review">Review</label>
                     <input
                     type="text"
