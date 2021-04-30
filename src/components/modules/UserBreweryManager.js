@@ -19,6 +19,12 @@ export const AddNewUserBrewery = (newUserBrewery) =>{
     }).then(response => response.json())
 }
 
+export const DeleteUserBrewery = (id) =>{
+    return fetch (`${remoteURL}/userBreweries/${id}?_expand=user`, {
+        method: "DELETE",
+    })
+    .then(response => response.json())
+}
 export const AddNewUserBreweryReview = (newUserBreweryReview) =>{
     return fetch (`${remoteURL}/userBreweries`, {
         method: "PUT",
@@ -27,4 +33,9 @@ export const AddNewUserBreweryReview = (newUserBreweryReview) =>{
         },
         body: JSON.stringify(newUserBreweryReview)
     }).then(response => response.json())
+}
+
+export const getBrewerybyUserBreweryId = () =>{
+    return fetch (`${remoteURL}/userbreweries/?&_expand=brewery&_expand=user`)
+    .then(response => response.json())
 }

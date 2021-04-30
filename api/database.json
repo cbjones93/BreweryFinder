@@ -128511,6 +128511,11 @@
       "userId": 3,
       "currentUserId": 1,
       "id": 12
+    },
+    {
+      "userId": 2,
+      "currentUserId": 1,
+      "id": 13
     }
   ],
   "userBreweries": [
