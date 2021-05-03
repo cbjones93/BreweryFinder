@@ -19,18 +19,19 @@ export const UserBreweryCard = ({ brewery }) => {
     useEffect(() => {
         getUserBreweryRelationship(brewery.id, currentUser).then(UsersFromAPI => {
             setUserToBrewery(UsersFromAPI);
+            console.log(UsersFromAPI.beenToBrewery)
             setIsLoading(false);
         })
     }, [brewery])
     // console.log(userToBrewery[0].beenToBrewery)
     return (
         <>
-        {userToBrewery.beenToBrewery === true ? 
+        {userToBrewery[0]?.beenToBrewery === true ? 
            
             <div className="userBreweryCard">
             <div className="card-content">
                 <h3>Your Review:</h3>
-                <p>{userToBrewery.review}</p>
+                <p>{userToBrewery[0].review}</p>
             </div>
         </div>
         :<div></div>}
