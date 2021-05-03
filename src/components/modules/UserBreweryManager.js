@@ -5,7 +5,10 @@ export const getUserBreweriesByBreweryId = (breweryId) => {
     return fetch (`${remoteURL}/userBreweries?breweryId=${breweryId}&_expand=user`)
     .then(response => response.json())
 }
-
+export const getUserBreweryRelationship = (breweryId, userId) =>{
+    return fetch (`${remoteURL}/userBreweries?breweryId=${breweryId}&userId=${userId}`)
+    .then(response => response.json())
+}
 export const AddNewUserBrewery = (newUserBrewery) =>{
     return fetch (`${remoteURL}/userBreweries`, {
         method: "POST",

@@ -5,7 +5,7 @@ import { Login } from "./components/auth/Login"
 import { Register } from './components/auth/Register'
 import { BrewerySearch } from './components/breweries/BrewerySearch'
 import { BreweryCard } from "./components/breweries/BreweryCard"
-import { BreweryDetail } from "./components/breweries/BreweryCardDetail"
+import { BreweryDetail } from "./components/breweries/BreweryDetailCardList"
 import {FollowingList} from './components/follow/FollowList'
 import {AddFollowList} from './components/follow/AddFollowList'
 import { MyBreweryList } from "./components/mybreweries/MyBreweryList"
