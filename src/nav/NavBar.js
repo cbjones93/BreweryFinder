@@ -1,6 +1,5 @@
 import React from "react"
 import { Link, useHistory } from "react-router-dom"
-import {getUserById} from '../components/modules/UserManager'
 import './NavBar.css'
 import BreweryLogo from '../components/images/BreweryLogo.png'
 

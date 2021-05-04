@@ -5,10 +5,11 @@ import { Login } from "./components/auth/Login"
 import { Register } from './components/auth/Register'
 import { BrewerySearch } from './components/breweries/BrewerySearch'
 import { BreweryCard } from "./components/breweries/BreweryCard"
-import { BreweryDetail } from "./components/breweries/BreweryCardDetail"
+import { BreweryDetail } from "./components/breweries/BreweryDetailCardList"
 import {FollowingList} from './components/follow/FollowList'
 import {AddFollowList} from './components/follow/AddFollowList'
-import { MyBreweryList } from "./components/favorites/MyBreweryList"
+import { MyBreweryList } from "./components/mybreweries/MyBreweryList"
+import { ReviewForm } from "./components/mybreweries/BreweryReviewForm"
 
 export const ApplicationViews = ({ isAuthenticated, setAuthUser }) => {
     return (
@@ -43,6 +44,9 @@ export const ApplicationViews = ({ isAuthenticated, setAuthUser }) => {
             <Route path="/mybreweries">
                 <MyBreweryList />
             </Route>
+            {/* <Route path="/review">
+                <ReviewForm />
+            </Route> */}
         </>
     )
 }
