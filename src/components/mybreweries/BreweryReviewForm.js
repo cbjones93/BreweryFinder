@@ -3,8 +3,8 @@ import {useHistory, useParams} from 'react-router-dom'
 import {StarRating} from '../breweries/StarRating'
 import {updateUserBrewery, getUserBreweryById} from '../modules/UserBreweryManager'
 
-export const ReviewForm = ({userBrewery, getAndSetUserBreweryRelationship}) =>{
-    const [review, setReview] = useState("");
+export const ReviewForm = ({userBrewery, getAndSetUserBreweryRelationship, toggleForm}) =>{
+    const [review, setReview] = useState(userBrewery.review? userBrewery.review : "");
     const [isLoading, setIsLoading]= useState(false)
     const history = useHistory();
     const {breweryId} = useParams();
@@ -21,6 +21,12 @@ export const ReviewForm = ({userBrewery, getAndSetUserBreweryRelationship}) =>{
            copyUserBrewery.review=review
             updateUserBrewery(copyUserBrewery)
             .then(getAndSetUserBreweryRelationship)
+            .then(()=>{
+                toggleForm()
+                setIsLoading(false)
+            })
+        
+
         }
 
         // useEffect(()=>{

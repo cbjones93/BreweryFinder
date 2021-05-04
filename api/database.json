@@ -128499,11 +128499,6 @@
     },
     {
       "userId": 1,
-      "currentUserId": 2,
-      "id": 7
-    },
-    {
-      "userId": 1,
       "currentUserId": 3,
       "id": 9
     },
@@ -128530,8 +128525,15 @@
       "userId": 1,
       "breweryId": "6553",
       "beenToBrewery": true,
-      "review": "",
+      "review": "Blah Blah ",
       "id": 2
+    },
+    {
+      "userId": 2,
+      "breweryId": "6553",
+      "beenToBrewery": true,
+      "review": "Blah Blah Blah",
+      "id": 3
     }
   ]
 }
