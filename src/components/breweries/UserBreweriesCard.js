@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { ReviewForm } from "../mybreweries/BreweryReviewForm";
-import { updateUserBrewery, getUserBreweryRelationship, getUserBreweries } from '../modules/UserBreweryManager'
+import { updateUserBrewery, getUserBreweryRelationship, getUserBreweries, DeleteUserBrewery } from '../modules/UserBreweryManager'
 
 
 
@@ -11,48 +11,63 @@ export const UserBreweryCard = ({ brewery, getUserBreweries, handleAddToBrewerie
     const [isLoading, setIsLoading] = useState(false);
     const { breweryId } = useParams();
     const history = useHistory();
+
+    const handleDeleteReview = (reviewObj) => {
+        const deleteReview = {...reviewObj}
+        deleteReview.review = ""
+        updateUserBrewery(deleteReview)
+            .then(getUserBreweries).then(getAndSetUserBreweryRelationship)
+    }
     const toggleVisited = breweryObj => {
-   
+
         const breweryToEdit = { ...breweryObj }
         breweryToEdit.beenToBrewery = !breweryToEdit.beenToBrewery
         updateUserBrewery(breweryToEdit)
-            .then(getUserBreweries).then(history.push(`/brewery/${breweryId}`))
+            .then(getUserBreweries).then(getAndSetUserBreweryRelationship)
     }
     // get brewery user relationship into state
     useEffect(() => {
-        getUserBreweryRelationship(brewery.id, currentUser).then(UsersFromAPI => {
-            setUserToBrewery(UsersFromAPI);
-            console.log(UsersFromAPI.beenToBrewery)
-            setIsLoading(false);
-        })
+        getAndSetUserBreweryRelationship()
     }, [brewery])
+
+    const getAndSetUserBreweryRelationship = () => {
+        return getUserBreweryRelationship(brewery.id, currentUser).then(UsersFromAPI => {
+            setUserToBrewery(UsersFromAPI);
+            console.log(UsersFromAPI[0]?.beenToBrewery)
+            setIsLoading(false);
+        }
+        )
+    }
     // console.log(userToBrewery[0].beenToBrewery)
-    if (userToBrewery[0]?.review > 0) {
+    if (userToBrewery[0]?.review.length > 0) {
         return (
             <>
                 <div className="userBreweryCard">
                     <div className="card-content">
                         <h3>Your Review:</h3>
-                        <p>{userToBrewery[0].review}</p>
+                        <p>{userToBrewery[0].review} </p>
+                        <button className="deleteReview" type="button" onClick={() => handleDeleteReview(userToBrewery[0])}>Delete Review</button>
                     </div>
                 </div>
             </>
         )
     }
-    else if (!(userToBrewery[0]?.review > 0)) {
+    else if (userToBrewery[0]?.beenToBrewery===true) {
         return (
             <div>Looks like you've been here! Would you like to leave a review?
-            <ReviewForm />
-            <button className="addToFavorites" type="button" onClick={() => toggleVisited(userToBrewery[0])}>I haven't been here yet</button>
+                <ReviewForm
+                    getAndSetUserBreweryRelationship={getAndSetUserBreweryRelationship}
+                    userBrewery={userToBrewery[0]} />
+                <button className="addToFavorites" type="button" onClick={() => toggleVisited(userToBrewery[0])}>I haven't been here yet</button>
             </div>
         )
     }
 
-    else if (userToBrewery[0]){
+    else if (userToBrewery[0]) {
         return (
             <>
-                <button className="addToFavorites" type="button" onClick={() => handleAddToBreweriesIveBeen(userToBrewery[0])}>I've been here!</button>
-                
+                <button className="addToFavorites" type="button" onClick={() =>toggleVisited(userToBrewery[0])}>I've been here!</button>
+
             </>
         )
     }
@@ -60,9 +75,9 @@ export const UserBreweryCard = ({ brewery, getUserBreweries, handleAddToBrewerie
     else {
         return (
             <>
-            <button className="addToFavorites" type="button" onClick={() => handleAddToBreweriesIveBeen(userToBrewery[0])}>I've been here!</button>
-            <button className="addToFavorites" type="button" onClick={() => handleAddToBreweriesToVisit(userToBrewery[0])}>I wanna go here!</button>
-        </>
+                <button className="addToFavorites" type="button" onClick={() => handleAddToBreweriesIveBeen(userToBrewery[0])}>I've been here!</button>
+                <button className="addToFavorites" type="button" onClick={() => handleAddToBreweriesToVisit(userToBrewery[0])}>I wanna go here!</button>
+            </>
         )
     }
 

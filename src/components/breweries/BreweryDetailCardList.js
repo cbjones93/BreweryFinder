@@ -8,13 +8,14 @@ import { BreweryDetailCard } from "./BreweryDetailCard"
 import { UserBreweryCard } from './UserBreweriesCard'
 import { ReviewForm } from '../mybreweries/BreweryReviewForm'
 
-export const BreweryDetail = () => {
+export const BreweryDetail = (getAndSetUserBreweryRelationship) => {
     const [brewery, setBrewery] = useState({})
     const [usersFrombreweries, setUsersFromBreweries] = useState([])
     const [isLoading, setIsLoading] = useState(true);
     const { breweryId } = useParams();
     const currentUser = parseInt(sessionStorage.getItem("app_user_id"));
     const history = useHistory();
+    
     const getUsersFromUserBreweries = () => {
         return getUserBreweriesByBreweryId(breweryId)
         .then(breweriesFromAPI =>  setUsersFromBreweries(breweriesFromAPI))
@@ -25,10 +26,10 @@ export const BreweryDetail = () => {
             "userId": currentUser,
             "breweryId": breweryId,
             "beenToBrewery": false,
-        
+            "review": ""
         }
         AddNewUserBrewery(newUserBreweryObject)
-            .then(() => getUserBreweriesByBreweryId(breweryId).then(setUsersFromBreweries)).then(window.alert("Added to your 'Places I Wanna Go' ")).then(history.push(`/brewery/${breweryId}`))
+            .then(() => getUserBreweriesByBreweryId(breweryId).then(setUsersFromBreweries)).then(window.alert("Added to your 'Places I Wanna Go' ")).then(getAndSetUserBreweryRelationship)
     }
     const handleAddToBreweriesIveBeen = () => {
         const newUserBreweryObject = {
@@ -38,7 +39,7 @@ export const BreweryDetail = () => {
             "review":""
         }
         AddNewUserBrewery(newUserBreweryObject)
-            .then(() => getUserBreweriesByBreweryId(breweryId).then(setUsersFromBreweries)).then(window.alert("Added to your 'Places I've Been'")).then(history.push(`/brewery/${breweryId}`))
+            .then(() => getUserBreweriesByBreweryId(breweryId).then(setUsersFromBreweries)).then(window.alert("Added to your 'Places I've Been'")).then(getAndSetUserBreweryRelationship)
     }
 
     useEffect(() => {
