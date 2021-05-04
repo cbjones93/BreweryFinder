@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getBreweryById } from '../modules/BreweryManager'
 import { getUserBreweriesByBreweryId, AddNewUserBrewery } from '../modules/UserBreweryManager';
+import { Link, useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom"
 import { BreweryReviewCard } from './BreweryReviewCard'
 import { BreweryDetailCard } from "./BreweryDetailCard"
@@ -13,6 +14,7 @@ export const BreweryDetail = () => {
     const [isLoading, setIsLoading] = useState(true);
     const { breweryId } = useParams();
     const currentUser = parseInt(sessionStorage.getItem("app_user_id"));
+    const history = useHistory();
     const getUsersFromUserBreweries = () => {
         return getUserBreweriesByBreweryId(breweryId)
         .then(breweriesFromAPI =>  setUsersFromBreweries(breweriesFromAPI))
@@ -25,7 +27,7 @@ export const BreweryDetail = () => {
             "beenToBrewery": false
         }
         AddNewUserBrewery(newUserBreweryObject)
-            .then(() => getUserBreweriesByBreweryId(breweryId).then(setUsersFromBreweries)).then(window.alert("Added to your 'Places I Wanna Go' "))
+            .then(() => getUserBreweriesByBreweryId(breweryId).then(setUsersFromBreweries)).then(window.alert("Added to your 'Places I Wanna Go' ")).then(history.push(`/brewery/${breweryId}`))
     }
     const handleAddToBreweriesIveBeen = () => {
         const newUserBreweryObject = {
@@ -35,7 +37,7 @@ export const BreweryDetail = () => {
             "review":""
         }
         AddNewUserBrewery(newUserBreweryObject)
-            .then(() => getUserBreweriesByBreweryId(breweryId).then(setUsersFromBreweries)).then(window.alert("Added to your 'Places I've Been'"))
+            .then(() => getUserBreweriesByBreweryId(breweryId).then(setUsersFromBreweries)).then(window.alert("Added to your 'Places I've Been'")).then(history.push(`/brewery/${breweryId}`))
     }
 
     useEffect(() => {
@@ -68,8 +70,8 @@ export const BreweryDetail = () => {
         />
                     <UserBreweryCard
                         brewery={brewery}
-                        // handleAddToBreweriesIveBeen={handleAddToBreweriesIveBeen}
-                        // handleAddToBreweriesToVisit={handleAddToBreweriesToVisit}
+                        handleAddToBreweriesIveBeen={handleAddToBreweriesIveBeen}
+                        handleAddToBreweriesToVisit={handleAddToBreweriesToVisit}
                          />
                
         <div>

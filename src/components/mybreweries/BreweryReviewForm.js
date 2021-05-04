@@ -4,7 +4,8 @@ import {StarRating} from '../breweries/StarRating'
 import {updateUserBrewery} from '../modules/UserBreweryManager'
 
 export const ReviewForm = () =>{
-    const [review, setReview] = useState([]);
+    const [review, setReview] = useState({
+    });
     const [isLoading, setIsLoading]= useState(false)
     const history = useHistory();
 
@@ -27,7 +28,7 @@ export const ReviewForm = () =>{
                 <div className="formgrid">
                     {/* <label htmlFor="rating">Rating
                     <StarRating /></label> */}
-                    <label htmlFor="review">Review</label>
+                    <label htmlFor="review"></label>
                     <input
                     type="text"
                     required

@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react"
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { ReviewForm } from "../mybreweries/BreweryReviewForm";
-import { updateUserBrewery, getUserBreweryRelationship } from '../modules/UserBreweryManager'
+import { updateUserBrewery, getUserBreweryRelationship, getUserBreweries } from '../modules/UserBreweryManager'
 
 
-export const UserBreweryCard = ({ brewery }) => {
+
+export const UserBreweryCard = ({ brewery, getUserBreweries, handleAddToBreweriesIveBeen, handleAddToBreweriesToVisit }) => {
     const currentUser = parseInt(sessionStorage.getItem("app_user_id"));
     const [userToBrewery, setUserToBrewery] = useState([])
     const [isLoading, setIsLoading] = useState(false);
+    const { breweryId } = useParams();
     const history = useHistory();
-    // const toggleVisited = breweryObj =>{
-    //     const breweryToEdit = {...breweryObj}
-    //     breweryToEdit.beenToBrewery= !breweryToEdit.beenToBrewery
-    //     updateUserBrewery(breweryToEdit)
-    //     .then(getUserBreweries)
-    // }
+    const toggleVisited = breweryObj => {
+   
+        const breweryToEdit = { ...breweryObj }
+        breweryToEdit.beenToBrewery = !breweryToEdit.beenToBrewery
+        updateUserBrewery(breweryToEdit)
+            .then(getUserBreweries).then(history.push(`/brewery/${breweryId}`))
+    }
     // get brewery user relationship into state
     useEffect(() => {
         getUserBreweryRelationship(brewery.id, currentUser).then(UsersFromAPI => {
@@ -24,45 +27,49 @@ export const UserBreweryCard = ({ brewery }) => {
         })
     }, [brewery])
     // console.log(userToBrewery[0].beenToBrewery)
-    return (
-        <>
-        {userToBrewery[0]?.beenToBrewery === true ? 
-           
-            <div className="userBreweryCard">
-            <div className="card-content">
-                <h3>Your Review:</h3>
-                <p>{userToBrewery[0].review}</p>
+    if (userToBrewery[0]?.beenToBrewery === true && (userToBrewery[0]?.review > 0)) {
+        return (
+            <>
+                <div className="userBreweryCard">
+                    <div className="card-content">
+                        <h3>Your Review:</h3>
+                        <p>{userToBrewery[0].review}</p>
+                    </div>
+                </div>
+            </>
+        )
+    }
+    else if (userToBrewery[0]?.beenToBrewery === true && (!(userToBrewery[0]?.review > 0))) {
+        return (
+            <div>Looks like you've been here! Would you like to leave a review?
+            <ReviewForm />
+            <button className="addToFavorites" type="button" onClick={() => toggleVisited(userToBrewery[0])}>I haven't been here yet</button>
             </div>
-        </div>
-        :<div></div>}
-        </>
-    )    // if (userToBrewery.[0].beenToBrewery === true && userToBrewery[0].review.length > 0) {
-    //     return (
-    //         <div className="userBreweryCard">
-    //             <div className="card-content">
-    //                 <h3>Your Review:</h3>
-    //                 <p>{userToBrewery.review}</p>
-    //             </div>
-    //         </div>
-    //     )
-    // }
-    // else {
-    //     <div>test</div>
-    // }
+        )
+    }
 
-    // if (user.beenToBrewery === true && user.review.length > 0 && user.userId === currentUser) {
-    //     return (
-    //         <div className="userBreweryCard">
-    //             <div className="card-content">
-    //                 <h3>Your Review:</h3>
-    //                 <p>{user.review}</p>
-    //             </div>
-    //         </div>
-    //     )
-    // }
-    // else if (user.beenToBrewery === true && user.userId ===currentUser && (!(user.review.length >0))){
-    //     <ReviewForm />
-    // }
+    else if (userToBrewery[0]){
+        return (
+            <>
+                <button className="addToFavorites" type="button" onClick={() => toggleVisited(userToBrewery[0])}>I've been here!</button>
+                
+            </>
+        )
+    }
+
+    else {
+        return (
+            <>
+            <button className="addToFavorites" type="button" onClick={() => handleAddToBreweriesIveBeen(userToBrewery[0])}>I've been here!</button>
+            <button className="addToFavorites" type="button" onClick={() => handleAddToBreweriesToVisit(userToBrewery[0])}>I wanna go here!</button>
+        </>
+        )
+    }
+
+
+
+
+
     // else if (user.beenToBrewery === false && user.userId === currentUser) {
     //     return (
     //         <>
