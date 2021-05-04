@@ -1,0 +1,6 @@
+.review.inactive {
+  visibility: hidden;
+}
+.review.active{
+    visibility: visible;
+}
