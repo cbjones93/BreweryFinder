@@ -128522,8 +128522,16 @@
     {
       "userId": 1,
       "breweryId": "666",
-      "beenToBrewery": false,
-      "id": 1
+      "beenToBrewery": true,
+      "id": 1,
+      "review": ""
+    },
+    {
+      "userId": 1,
+      "breweryId": "6553",
+      "beenToBrewery": true,
+      "review":"Pretty cool place!",
+      "id": 2
     }
   ]
 }

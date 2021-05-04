@@ -24,7 +24,8 @@ export const BreweryDetail = () => {
         const newUserBreweryObject = {
             "userId": currentUser,
             "breweryId": breweryId,
-            "beenToBrewery": false
+            "beenToBrewery": false,
+        
         }
         AddNewUserBrewery(newUserBreweryObject)
             .then(() => getUserBreweriesByBreweryId(breweryId).then(setUsersFromBreweries)).then(window.alert("Added to your 'Places I Wanna Go' ")).then(history.push(`/brewery/${breweryId}`))

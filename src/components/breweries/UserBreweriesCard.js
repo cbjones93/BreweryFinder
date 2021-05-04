@@ -27,7 +27,7 @@ export const UserBreweryCard = ({ brewery, getUserBreweries, handleAddToBrewerie
         })
     }, [brewery])
     // console.log(userToBrewery[0].beenToBrewery)
-    if (userToBrewery[0]?.beenToBrewery === true && (userToBrewery[0]?.review > 0)) {
+    if (userToBrewery[0]?.review > 0) {
         return (
             <>
                 <div className="userBreweryCard">
@@ -39,7 +39,7 @@ export const UserBreweryCard = ({ brewery, getUserBreweries, handleAddToBrewerie
             </>
         )
     }
-    else if (userToBrewery[0]?.beenToBrewery === true && (!(userToBrewery[0]?.review > 0))) {
+    else if (!(userToBrewery[0]?.review > 0)) {
         return (
             <div>Looks like you've been here! Would you like to leave a review?
             <ReviewForm />
@@ -51,7 +51,7 @@ export const UserBreweryCard = ({ brewery, getUserBreweries, handleAddToBrewerie
     else if (userToBrewery[0]){
         return (
             <>
-                <button className="addToFavorites" type="button" onClick={() => toggleVisited(userToBrewery[0])}>I've been here!</button>
+                <button className="addToFavorites" type="button" onClick={() => handleAddToBreweriesIveBeen(userToBrewery[0])}>I've been here!</button>
                 
             </>
         )

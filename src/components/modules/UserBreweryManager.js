@@ -34,6 +34,11 @@ export const updateUserBrewery = (newUserBreweryObj) =>{
         body: JSON.stringify(newUserBreweryObj)
     }).then(response => response.json())
 }
+
+export const getUserBreweryById = (id) =>{
+    return fetch (`${remoteURL}/userBreweries?breweryId=${id}`) 
+    .then(response => response.json())
+}
 export const getAllUserBreweries = (userId) =>{
     return fetch (`${remoteURL}/userbreweries/?userId=${userId}&_expand=brewery&_expand=user`)
     .then(response => response.json())

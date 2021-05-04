@@ -1,13 +1,14 @@
-import React, {useState} from 'react';
-import {useHistory} from 'react-router-dom'
+import React, {useEffect, useState} from 'react';
+import {useHistory, useParams} from 'react-router-dom'
 import {StarRating} from '../breweries/StarRating'
-import {updateUserBrewery} from '../modules/UserBreweryManager'
+import {updateUserBrewery, getUserBreweryById} from '../modules/UserBreweryManager'
 
 export const ReviewForm = () =>{
     const [review, setReview] = useState({
     });
     const [isLoading, setIsLoading]= useState(false)
     const history = useHistory();
+    const {breweryId} = useParams();
 
     const handleFieldChange = event =>{
         const stateToChange = {...event};
@@ -17,10 +18,19 @@ export const ReviewForm = () =>{
     const createReview = event =>{
         event.preventDefault();
             setIsLoading(true);
-            updateUserBrewery(event)
+            const createdReview = {
+                review: review.review
+            }
+            updateUserBrewery(createdReview)
             .then(()=>history.push("favorites"))
         }
-    
+
+        useEffect(()=>{
+            getUserBreweryById(breweryId).then(userBrewery=>{
+                setReview(userBrewery)
+            })
+        }, [breweryId])
+    console.log(review)
     return (
         <>
         <form>
@@ -28,7 +38,7 @@ export const ReviewForm = () =>{
                 <div className="formgrid">
                     {/* <label htmlFor="rating">Rating
                     <StarRating /></label> */}
-                    <label htmlFor="review"></label>
+                    <label htmlFor="review">Review</label>
                     <input
                     type="text"
                     required
