@@ -5,7 +5,8 @@ export const FollowerCard = ({follower, handleAddFollow}) =>{
     return (
         <div className="follower-card">
             <h3>
-                <span className="followerCardId"> {follower.name}</span>   
+                <span className="followerCardId"> {follower.name}</span> 
+                <Link to={`/userbreweries/${follower.id}`}><button className="UserFavorites" type="button" >{follower.name}'s Breweries List </button> </Link>  
                 <Link to={`/follow`}><button type="button" className="searchButton" onClick={()=>handleAddFollow(follower.id)}> Follow User</button>
            </Link>
             </h3>

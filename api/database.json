@@ -128505,12 +128505,12 @@
     {
       "userId": 3,
       "currentUserId": 1,
-      "id": 12
+      "id": 10
     },
     {
       "userId": 2,
       "currentUserId": 1,
-      "id": 13
+      "id": 11
     }
   ],
   "userBreweries": [
@@ -128534,6 +128534,27 @@
       "beenToBrewery": true,
       "review": "Blah Blah Blah",
       "id": 3
+    },
+    {
+      "userId": 3,
+      "breweryId": "6553",
+      "beenToBrewery": true,
+      "review": "Blah Blah",
+      "id": 3
+    },
+    {
+      "userId": 2,
+      "breweryId": "6493",
+      "beenToBrewery": false,
+      "review": "",
+      "id": 4
+    },
+    {
+      "userId": 3,
+      "breweryId": "2",
+      "beenToBrewery": false,
+      "review": "",
+      "id": 5
     }
   ]
 }
