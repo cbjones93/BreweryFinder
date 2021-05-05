@@ -1,5 +1,6 @@
 
 import React from "react";
+import {Link} from 'react-router-dom'
 
 export const FollowCard = ({ follow, handleDeleteFollowing }) => {
     return (
@@ -9,6 +10,7 @@ export const FollowCard = ({ follow, handleDeleteFollowing }) => {
                 <h3>
                     <span className="followCardName">{follow.user.name}</span>
                     <p className="followCardEmail">{follow.user.email}</p>
+                    <Link to={`/userbreweries/${follow.user.id}`}><button className="UserFavorites" type="button" >{follow.user.name}'s Breweries List </button> </Link>
                     <button className="buttonRemoveFollow" type="button" onClick={() => handleDeleteFollowing(follow.id)}> Stop Following </button>
 
                 </h3>

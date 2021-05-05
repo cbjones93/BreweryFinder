@@ -6,12 +6,13 @@ import { useParams } from "react-router-dom"
 import { BreweryReviewCard } from './BreweryReviewCard'
 import { BreweryDetailCard } from "./BreweryDetailCard"
 import { UserBreweryCard } from './UserBreweriesCard'
-import { ReviewForm } from '../mybreweries/BreweryReviewForm'
+import {getAllFollowing , followUser } from '../modules/FollowManager'
 
 export const BreweryDetail = (getAndSetUserBreweryRelationship) => {
     const [brewery, setBrewery] = useState({})
     const [usersFrombreweries, setUsersFromBreweries] = useState([])
     const [isLoading, setIsLoading] = useState(true);
+    const [followers, setFollowers] = useState([])
     const { breweryId } = useParams();
     const currentUser = parseInt(sessionStorage.getItem("app_user_id"));
     const history = useHistory();
@@ -40,6 +41,14 @@ export const BreweryDetail = (getAndSetUserBreweryRelationship) => {
         }
         AddNewUserBrewery(newUserBreweryObject)
             .then(() => getUserBreweriesByBreweryId(breweryId).then(setUsersFromBreweries)).then(window.alert("Added to your 'Places I've Been'")).then(getAndSetUserBreweryRelationship)
+    }
+    const handleAddFollow=id =>{
+        const newUserObject = {
+            "userId":id,
+            "currentUserId": currentUser
+        }
+        followUser(newUserObject)
+        .then(()=>getAllFollowing().then(setFollowers).then(window.location.reload()))
     }
 
     useEffect(() => {
@@ -83,6 +92,7 @@ export const BreweryDetail = (getAndSetUserBreweryRelationship) => {
                         <BreweryReviewCard
                             key={user.id}
                             user={user}
+                            handleAddFollow={handleAddFollow}
                         />
                     )
                 } 
