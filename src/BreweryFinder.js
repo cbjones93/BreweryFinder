@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {NavBar} from './nav/NavBar'
 import {ApplicationViews} from './ApplicationViews'
-import {Footer} from './components/footer/Footer.js'
+
 
 
 export const BreweryFinder = () => {

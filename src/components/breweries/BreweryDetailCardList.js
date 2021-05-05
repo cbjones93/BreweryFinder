@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom"
 import { BreweryReviewCard } from './BreweryReviewCard'
 import { BreweryDetailCard } from "./BreweryDetailCard"
 import { UserBreweryCard } from './UserBreweriesCard'
-import { ReviewForm } from '../mybreweries/BreweryReviewForm'
 import {getAllFollowing , followUser } from '../modules/FollowManager'
 
 export const BreweryDetail = (getAndSetUserBreweryRelationship) => {

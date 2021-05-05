@@ -19,14 +19,14 @@ export const BreweryReviewCard = ({user, handleAddFollow}) =>{
     useEffect(() => {
         getFollowing()
     }, [])
-    console.log(following.currentUserId)
+    console.log(following.userId)
     const history =useHistory();
     return (
         <div className="breweryReviewCard">
             <h4>User:{user.user.name}</h4>
-            {following.map(follow=>
-             follow.userId===user.user.id ? <div></div> :
-            <button type="button" className="searchButton" onClick={()=>handleAddFollow(user.user.id)}> Follow User</button>)}
+            {following.find(follow=>
+             follow.userId===user.user.id) ? <div></div> :
+            <button type="button" className="searchButton" onClick={()=>handleAddFollow(user.user.id)}> Follow User</button>}
             <p>{user.review}</p>
         </div>
     )

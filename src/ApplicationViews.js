@@ -10,7 +10,7 @@ import {FollowingList} from './components/follow/FollowList'
 import {AddFollowList} from './components/follow/AddFollowList'
 import { MyBreweryList } from "./components/mybreweries/MyBreweryList"
 import {UserBreweryList} from './components/mybreweries/UserBreweryList'
-import { ReviewForm } from "./components/mybreweries/BreweryReviewForm"
+
 
 export const ApplicationViews = ({ isAuthenticated, setAuthUser }) => {
     return (

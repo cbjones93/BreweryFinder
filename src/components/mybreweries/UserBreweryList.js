@@ -47,9 +47,6 @@ console.log(targetedUser)
             })}
             <h3>Places I Wanna Go</h3>
             {myBreweries.map(brewery => {
-                console.log(brewery.id)
-              
-                console.log(brewery.beenToBrewery)
                 if (brewery.beenToBrewery === false)
                     return (
                         <>
