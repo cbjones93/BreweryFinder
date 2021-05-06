@@ -1,26 +1,49 @@
-import React, { useEffect, useState, useRef } from "react"
-import { Link, useHistory, useParams } from 'react-router-dom';
+import React, { useEffect, useState} from "react"
+import { useParams } from 'react-router-dom';
 import { ReviewForm } from "../mybreweries/BreweryReviewForm";
-import { updateUserBrewery, getUserBreweryRelationship, getUserBreweries, DeleteUserBrewery } from '../modules/UserBreweryManager'
-import { useDetectClick } from "../modules/Helper"
+import { updateUserBrewery, getUserBreweryRelationship, AddNewUserBrewery } from '../modules/UserBreweryManager'
+
+
 import "./Review.css"
 
 
 
-export const UserBreweryCard = ({ brewery, getUserBreweries,handleAddToBreweriesIveBeen, handleAddToBreweriesToVisit }) => {
+export const UserBreweryCard = ({ brewery, getUserBreweries }) => {
     const currentUser = parseInt(sessionStorage.getItem("app_user_id"));
-    const reviewRef = useRef(null)
-    const [isActive, setIsActive] = useDetectClick(reviewRef, false);
-    const onClick = () => setIsActive(!isActive);
-    const [userToBrewery, setUserToBrewery] = useState([])
-
-    const [isLoading, setIsLoading] = useState(false);
     const { breweryId } = useParams();
-    const history = useHistory();
 
-    const [isFormVisible,setIsFormVisible] = useState(false)
-    const toggleForm = (event) =>{
-setIsFormVisible(!isFormVisible)
+    //useState//
+    const [userToBrewery, setUserToBrewery] = useState([])
+    const [isLoading, setIsLoading] = useState(false);
+    const [isFormVisible, setIsFormVisible] = useState(false)
+
+
+    // Handle Buttons//
+    const handleAddToBreweriesToVisit = () => {
+        const newUserBreweryObject = {
+            "userId": currentUser,
+            "breweryId": breweryId,
+            "beenToBrewery": false,
+            "review": ""
+        }
+        AddNewUserBrewery(newUserBreweryObject)
+        window.alert("Added to your 'Places I Wanna Go' ")
+        getAndSetUserBreweryRelationship()
+    }
+    const handleAddToBreweriesIveBeen = () => {
+        const newUserBreweryObject = {
+            "userId": currentUser,
+            "breweryId": breweryId,
+            "beenToBrewery": true,
+            "review": ""
+        }
+        AddNewUserBrewery(newUserBreweryObject)
+            .then(window.alert("Added to your 'Places I've Been'"))
+            getAndSetUserBreweryRelationship()
+    }
+
+    const toggleForm = (event) => {
+        setIsFormVisible(!isFormVisible)
     }
     const handleDeleteReview = (reviewObj) => {
         const deleteReview = { ...reviewObj }
@@ -37,6 +60,10 @@ setIsFormVisible(!isFormVisible)
     }
 
 
+
+
+
+
     // get brewery user relationship into state
     useEffect(() => {
         getAndSetUserBreweryRelationship()
@@ -44,14 +71,13 @@ setIsFormVisible(!isFormVisible)
 
     const getAndSetUserBreweryRelationship = () => {
         return getUserBreweryRelationship(brewery.id, currentUser)
-        .then(UsersFromAPI => {
-            setUserToBrewery(UsersFromAPI);
-            console.log(UsersFromAPI[0]?.beenToBrewery)
-            setIsLoading(false);
-        }
-        )
+            .then(UsersFromAPI => {
+                setUserToBrewery(UsersFromAPI);
+                setIsLoading(false);
+            }
+            )
     }
-    // console.log(userToBrewery[0].beenToBrewery)
+
     if (userToBrewery[0]?.review.length > 0) {
         return (
             <>
@@ -63,12 +89,11 @@ setIsFormVisible(!isFormVisible)
                         <button className="deleteReview" type="button" onClick={() => handleDeleteReview(userToBrewery[0])}>Delete Review</button>
                         <button onClick={toggleForm}>Edit Review</button>
                         <div className={`review ${isFormVisible ? "active" : "inactive"}`}><ReviewForm
-                         getAndSetUserBreweryRelationship={getAndSetUserBreweryRelationship}
-                         userBrewery={userToBrewery[0]}
-                         toggleForm={toggleForm} />
-                         </div>
-                        {/* <button onClick={onClick}>Edit Review</button>
-                        <div ref={reviewRef} className={`review ${isActive ? "active" : "inactive"}`}><ReviewForm /></div> */}
+                            getAndSetUserBreweryRelationship={getAndSetUserBreweryRelationship}
+                            userBrewery={userToBrewery[0]}
+                            toggleForm={toggleForm} />
+                        </div>
+                      
                     </div>
                 </div>
             </>
@@ -103,26 +128,4 @@ setIsFormVisible(!isFormVisible)
             </>
         )
     }
-
-
-
-
-
-    // else if (user.beenToBrewery === false && user.userId === currentUser) {
-    //     return (
-    //         <>
-    //         <button className="buttonChangeToFalse" type="button" onClick={() => toggleVisited(user)}>{user.beenToBrewery?"I've not been here yet": "I've been here!"  }</button>
-    //     </>
-    //     )
-    // }
-
-    // else{
-    //     return (
-
-    //         <div>
-    //         <button className="addToFavorites" type="button" onClick={() => handleAddToBreweriesIveBeen(user.breweryId)}>I've been here!</button>
-    //         <button className="addToFavorites" type="button" onClick={() => handleAddToBreweriesToVisit(user.breweryId)}>I wanna go here!</button>
-    //         </div>
-    //     )
-    // }
 }

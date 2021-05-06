@@ -7,7 +7,7 @@ export const Register = ({setAuthUser}) => {
 
     const [registerUser, setRegisterUser] = useState({ firstName: "", lastName: "", email: "" })
     const [conflictDialog, setConflictDialog] = useState(false)
-
+     
     const history = useHistory()
 
     const handleInputChange = (event) => {

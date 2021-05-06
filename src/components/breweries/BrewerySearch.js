@@ -1,27 +1,34 @@
 import React, { useEffect, useState } from 'react'
-import {getBreweriesByState } from '../modules/BreweryManager'
-import {BreweryCard} from './BreweryCard'
+import { getBreweriesByState } from '../modules/BreweryManager'
 import './BrewerySearch.css'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export const BrewerySearch = () => {
     // const [cities, setCities] = useState([])
-    const [breweries,setBreweries]=useState([])
-const handleSelectState = (event) =>{
-getBreweriesByState(event.target.value)
-.then(breweriesFromAPI=>setBreweries(breweriesFromAPI))
-}
-    // useEffect(() => {
-    //     getAllCities().then(citiesFromAPI => {
-    //         setCities(citiesFromAPI)
-    //     })
-    // }, []);
-    
+    const [breweries, setBreweries] = useState([])
+    const [cities, setCities]=useState([])
+    const [selectedCity, setSelectedCity] = useState("")
+    const handleSelectState = (event) => {
+        getBreweriesByState(event.target.value)
+            .then(breweriesFromAPI => setBreweries(breweriesFromAPI))
+    }
+
+    const handleSelectCity = (event) => {
+     setSelectedCity(event.target.value)
+    }
+    const getCitiesFromState = () => {
+     const cities = Array.from(new Set(breweries.map(brewery=>brewery.city))).sort()
+     setCities(cities)
+    }
+    useEffect(()=>{
+        getCitiesFromState()
+    },[breweries])
+ 
     return (
         <>
             <h3>Select a state</h3>
             <select id="states" name="ST" onChange={handleSelectState}>
-                <option value= "0">Select a State</option>
+                <option value="0">Select a State</option>
                 <option value="Alabama">Alabama</option>
                 <option value="Alaska">Alaska</option>
                 <option value="Arizona">Arizona</option>
@@ -76,15 +83,22 @@ getBreweriesByState(event.target.value)
                 <option value="Other">Other</option>
             </select>
             <h3>Select a city</h3>
-            {breweries.map(eachBrewery =>{
+            <select id="cities" onChange={handleSelectCity}>
+{cities.map(city=>{
+return (
+    <option key ={city} value={city}>{city}</option>
+)
+})}
+</select>
+            {breweries.filter(brewery =>brewery.city.includes(selectedCity)).map(eachBrewery => {
                 return (
-                    
-                    <div className="searchResults">
-                        
-                <p>{eachBrewery.name} <Link to={`/brewery/${eachBrewery.id}`}><button className="details">Details</button></Link></p>
-                <p>Address: {eachBrewery.street}, {eachBrewery.city}, {eachBrewery.state}</p>
-               
-                </div>
+
+                    <div key={eachBrewery.id} className="searchResults">
+
+                        <p>{eachBrewery.name} <Link to={`/brewery/${eachBrewery.id}`}><button className="details">Details</button></Link></p>
+                        <p>Address: {eachBrewery.street}, {eachBrewery.city}, {eachBrewery.state}</p>
+
+                    </div>
                 )
             })}
         </>
