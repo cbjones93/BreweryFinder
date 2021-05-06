@@ -1,8 +1,7 @@
 import React from "react"
-import { useHistory } from 'react-router-dom';
+
 
 export const BreweryDetailCard = ({brewery}) =>{
-    const history = useHistory();
     const cleanPhone = (number => {
         // cleaned strips everything out of number string if its not a number (ex: dashes, decimals, spaces)
         const cleaned = ('' + number).replace(/\D/g, '')

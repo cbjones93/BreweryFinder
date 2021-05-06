@@ -1,28 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory, Link } from 'react-router-dom'
 import {usersToFollow, followUser} from '../modules/FollowManager'
 import {SearchBar} from './FollowSearch'
 
 export const AddFollowList= ()=>{
-    const history = useHistory();
-    const [Follows, setFollows]=useState([]);
+
     const [search, setSearch] = useState(" ");
     const [result, setResult]= useState([])
     const currentUser = parseInt(sessionStorage.getItem("app_user_id"));
-    const handleAddFollow=id =>{
-        const newUserObject = {
-            "userId":id,
-            "currentUserId": currentUser
-        }
-        followUser(newUserObject)
-        .then(()=>usersToFollow().then(setFollows))
-    }
 
-    const getUsersToFollow = () =>{
-        return usersToFollow(currentUser).then(followsFromAPI =>{
-            setFollows(followsFromAPI);
-        });
-    };
     const handleSearch = event =>{
         let searchChange=event.target.value
         setSearch(searchChange.toLowerCase())
@@ -44,9 +29,7 @@ export const AddFollowList= ()=>{
     useEffect(()=>{
         searchResults(search)
     }, [search])
-    useEffect (()=>{
-        getUsersToFollow()
-    }, [])
+   
     return (
         <div className="container-cards">
             <div className="searchBox">
@@ -64,7 +47,7 @@ export const AddFollowList= ()=>{
                         <SearchBar
                             key={search.id}
                             search={search}
-                            handleAddFollow={handleAddFollow}
+                            // handleAddFollow={handleAddFollow}
                         />
                     )}
             </div>

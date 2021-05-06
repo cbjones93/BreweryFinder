@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { MyBreweryCard } from './MyBreweryCard'
+
 import { UserBreweryCard } from './UserBreweryCard'
 import { getAllUserBreweries, DeleteUserBrewery } from '../modules/UserBreweryManager'
 import {useParams} from 'react-router-dom'
@@ -8,8 +8,7 @@ import {useParams} from 'react-router-dom'
 export const UserBreweryList = () => {
     const [myBreweries, setMyBreweries] = useState([]);
     const {targetedUser} = useParams();
-    // const targetedUserId = targetedUser.userId
-console.log(targetedUser)
+  
     const handleDeleteMyBrewery = id => {
         if (window.confirm("Do you want to delete this brewery?")) {
             DeleteUserBrewery(id)
@@ -34,7 +33,7 @@ console.log(targetedUser)
             <h1 className="myBrewery_list">My Breweries</h1>
             <h3> Places I've Been</h3>
             {myBreweries.map(brewery => {
-                if (brewery.beenToBrewery === true)
+                if (brewery.beenToBrewery === true){
                     return (
                       <> 
                         < UserBreweryCard 
@@ -44,10 +43,12 @@ console.log(targetedUser)
                             getUserBreweries={getUserBreweries} />
                             </>
                     )
+                }
+                  
             })}
             <h3>Places I Wanna Go</h3>
             {myBreweries.map(brewery => {
-                if (brewery.beenToBrewery === false)
+                if (brewery.beenToBrewery === false){
                     return (
                         <>
                         < UserBreweryCard 
@@ -57,6 +58,8 @@ console.log(targetedUser)
                             getUserBreweries={getUserBreweries} />
 </>
                     )
+                }
+                  
               
 
             })}

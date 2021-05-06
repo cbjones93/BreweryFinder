@@ -12,7 +12,7 @@ import { MyBreweryList } from "./components/mybreweries/MyBreweryList"
 import {UserBreweryList} from './components/mybreweries/UserBreweryList'
 
 
-export const ApplicationViews = ({ isAuthenticated, setAuthUser }) => {
+export const ApplicationViews = ({ setAuthUser }) => {
     return (
         <>
 
@@ -21,11 +21,11 @@ export const ApplicationViews = ({ isAuthenticated, setAuthUser }) => {
             </Route>
 
             <Route path="/register">
-                <Register />
+                <Register setAuthUser={setAuthUser}/>
             </Route>
 
             <Route exact path="/">
-                <Home setAuthUser={setAuthUser} />
+                <Home setAuthUser={setAuthUser}/>
             </Route>
             <Route path="/brewerySearch">
                 <BrewerySearch />
@@ -48,9 +48,7 @@ export const ApplicationViews = ({ isAuthenticated, setAuthUser }) => {
             <Route exact path="/userbreweries/:targetedUser(\d+)">
                 <UserBreweryList />
             </Route>
-            {/* <Route path="/review">
-                <ReviewForm />
-            </Route> */}
+         
         </>
     )
 }

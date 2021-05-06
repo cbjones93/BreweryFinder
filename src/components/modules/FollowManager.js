@@ -1,5 +1,5 @@
 const remoteURL = "http://localhost:8088"
-const currentUser = parseInt(sessionStorage.getItem("app_user_id"));
+
 
 export const getAllFollowing = (id) =>{
     return fetch (`${remoteURL}/follow/?currentUserId=${id}&_expand=user`)
@@ -11,7 +11,7 @@ export const usersToFollow = () =>{
     .then(response => response.json())
 }
 export const followUser = (newFollow) =>{
-    return fetch (`${remoteURL}/follow` , {
+    return fetch (`${remoteURL}/follow`, {
         method: "POST",
         headers :{
             "Content-Type" : "application/json"

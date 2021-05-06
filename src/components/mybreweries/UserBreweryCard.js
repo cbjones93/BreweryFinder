@@ -1,16 +1,10 @@
 import React from "react"
-import { Link, useHistory } from 'react-router-dom';
-import { updateUserBrewery } from "../modules/UserBreweryManager";
-import {ReviewForm} from './BreweryReviewForm'
+import { Link } from 'react-router-dom';
 
-export const UserBreweryCard = ({ brewery, handleDeleteMyBrewery, getUserBreweries}) => {
-    const history = useHistory();
-    const toggleVisited = breweryObj =>{
-        const breweryToEdit = {...breweryObj}
-        breweryToEdit.beenToBrewery= !breweryToEdit.beenToBrewery
-        updateUserBrewery(breweryToEdit)
-        .then(getUserBreweries)
-    }
+
+
+export const UserBreweryCard = ({ brewery}) => {
+
     return (
         <>
             <div className="breweryCard">

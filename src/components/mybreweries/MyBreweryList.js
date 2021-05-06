@@ -40,7 +40,7 @@ export const MyBreweryList = () => {
                             handleDeleteMyBrewery={handleDeleteMyBrewery}
                             getUserBreweries={getUserBreweries} />
                     )
-                   
+              
             })}
             <h3>Places I Wanna Go</h3>
             {myBreweries.map(brewery => {
@@ -53,7 +53,7 @@ export const MyBreweryList = () => {
                             getUserBreweries={getUserBreweries} />
 
                     )
-                    
+                  
               
 
             })}
