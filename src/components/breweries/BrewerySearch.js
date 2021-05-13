@@ -82,6 +82,8 @@ export const BrewerySearch = () => {
                 <option value="Wyoming">Wyoming</option>
                 <option value="Other">Other</option>
             </select>
+            {breweries.length >0 ?
+            <>
             <h3>Select a city</h3>
             <select id="cities" onChange={handleSelectCity}>
 {cities.map(city=>{
@@ -89,7 +91,7 @@ return (
     <option key ={city} value={city}>{city}</option>
 )
 })}
-</select>
+</select> </> :<div></div>}
             {breweries.filter(brewery =>brewery.city.includes(selectedCity)).map(eachBrewery => {
                 return (
 
