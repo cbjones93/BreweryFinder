@@ -32,8 +32,10 @@ export const NavBar = ({setIsAuthenticated,isAuthenticated}) => {
                 ?
 
                 <div className="authenticatedNav">
-                    <p>Hello, {currentUser.replace(/['"]+/g, '')}!</p>
-                    <div className="logout"><li className="navbar__item">
+                    
+                    <div className="logout">
+                        <li className="navbar__item">
+                    <p className="helloUser">Hello, {currentUser.replace(/['"]+/g, '')}!</p>
                         <span className="navbar__link" onClick={handleLogout}> Logout </span>
                     </li> </div>
                     <li className="navbar_search">

@@ -1,3 +1,13 @@
 .searchResults{
     border:1px solid
 }
+.brewerySearchBox{
+    display: flex;
+    flex-direction: row;
+}
+.stateSelection{
+    margin: 5px;
+}
+.citySelection{
+    margin: 5px;
+}

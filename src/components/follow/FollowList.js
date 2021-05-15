@@ -3,6 +3,7 @@ import { FollowCard } from './FollowCard'
 import { FollowerCard } from './FollowerCard'
 import { deleteFollowing, getAllFollowing, getAllFollowers, getUsers, followUser } from '../modules/FollowManager'
 import { useHistory, Link } from 'react-router-dom'
+import "./Follow.css"
 
 export const FollowingList = () => {
     const [following, setFollowing] = useState([]);
@@ -71,20 +72,26 @@ export const FollowingList = () => {
             {following.map(follow => {
                 if (follow.userId !== parseInt(sessionStorage.getItem("app_user_id")))
                     return (
+                        <div className="followList">
                         <FollowCard
                             key={follow.id}
                             follow={follow}
-                            handleDeleteFollowing={handleDeleteFollowing} />)
+                            handleDeleteFollowing={handleDeleteFollowing} />
+                            </div>
+                    )
             })}
             <h2 className="followers_list">People That Follow You</h2>
             {followers.map(follower => {
              
                 return (
+                    <div className="followerList">
                     <FollowerCard
                         key={follower.id}
                         follower={follower}
                         following={following}
-                        handleAddFollow={handleAddFollow} />)
+                        handleAddFollow={handleAddFollow} />
+                        </div>
+                        )
             }
             )
             }

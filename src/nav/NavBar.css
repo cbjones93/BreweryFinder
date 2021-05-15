@@ -18,10 +18,20 @@ ul {
   .logout{
     float: right;
     color: white;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0);
+    
   }
-.login{float: right;}
+  .helloUser {
+    cursor: default;
+  }
+.login{float: right;
+
+  background-color: rgba(0, 0, 0, 0);
+}
 .logo{
  float:left;
     width:150px;
  
 }
+

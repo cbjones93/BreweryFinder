@@ -6,6 +6,7 @@ import { BreweryReviewCard } from './BreweryReviewCard'
 import { BreweryDetailCard } from "./BreweryDetailCard"
 import { UserBreweryCard } from './UserBreweriesCard'
 import { followUser } from '../modules/FollowManager'
+import "./BreweryDetail.css"
 
 export const BreweryDetail = () => {
     const [brewery, setBrewery] = useState({})
@@ -53,7 +54,7 @@ export const BreweryDetail = () => {
 
     }, [breweryId]);
 
-    return (<>
+    return (<div className="breweryDetailContainer">
         <BreweryDetailCard
             brewery={brewery}
         />
@@ -76,6 +77,6 @@ export const BreweryDetail = () => {
         </div>
 
 
-    </>
+    </div>
     )
 }

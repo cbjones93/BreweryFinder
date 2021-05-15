@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MyBreweryCard } from './MyBreweryCard'
 import { getAllUserBreweries, DeleteUserBrewery } from '../modules/UserBreweryManager'
+import "./UserBrewery.css"
 
 
 export const MyBreweryList = () => {
