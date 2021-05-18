@@ -26,7 +26,7 @@ export const MyBreweryList = () => {
 
     useEffect(() => {
         getUserBreweries()
-    }, [])
+    }, [myBreweries])
 
     return (
         <div className="myBrewery-container-cards">
