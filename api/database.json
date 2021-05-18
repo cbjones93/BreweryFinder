@@ -128494,6 +128494,11 @@
       "email": "clifford@home.com",
       "name": "Ryan Clifford",
       "id": 9
+    },
+    {
+      "email": "hoff@home.com",
+      "name": "David Hasselhoff",
+      "id": 10
     }
   ],
   "follow": [
@@ -128566,6 +128571,26 @@
       "userId": 1,
       "currentUserId": 9,
       "id": 29
+    },
+    {
+      "userId": 5,
+      "currentUserId": 10,
+      "id": 30
+    },
+    {
+      "userId": 10,
+      "currentUserId": 1,
+      "id": 32
+    },
+    {
+      "userId": 10,
+      "currentUserId": 5,
+      "id": 33
+    },
+    {
+      "userId": 2,
+      "currentUserId": 10,
+      "id": 34
     }
   ],
   "userBreweries": [
@@ -128680,6 +128705,20 @@
       "beenToBrewery": true,
       "review": "",
       "id": 16
+    },
+    {
+      "userId": 10,
+      "breweryId": "1768",
+      "beenToBrewery": true,
+      "review": "Lovely place and the beers were magnificent!",
+      "id": 17
+    },
+    {
+      "userId": 10,
+      "breweryId": "7340",
+      "beenToBrewery": false,
+      "review": "",
+      "id": 18
     }
   ]
 }
